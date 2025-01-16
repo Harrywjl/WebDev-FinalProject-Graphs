@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<body>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+<script>
+    //Javascript
+    async function getData() {
+    const response = await fetch("GPA&Study_Hours.csv")
+    const data = await response.text()
+    const rows = data.split("\n").slice(1)
+    const gpa = []
+    const hours = []
+    for (let i = 1; i < rows.length; i++) { //478 Rows
+        let elem = rows[i]
+        const row = elem.split(",")
+        gpa.push(row[0])
+        hours.push(row[1])
+    }
+    const usedRows = [gpa, hours]
+    //
+    console.log(usedRows)
+    //
+    return usedRows
+    }
+  getData().then((dataRows) => {
+    labelArr = dataRows[0]
+    dataArr = dataRows[1]
+    createChart(labelArr, dataArr)
+  })
+
+  async function createChart(label, data) {
+    const ctx = document.getElementById('myChart')
+    new Chart(ctx, {
+      type: 'scatter',
+      data: {
+        options:{
+
+        labels: label,
+        datasets: [{
+          label: 'Relationship between GPA and Studying Time',
+          data: data,
+          borderColor: 'blue',
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        },
+        color: 'rgb(27, 242, 85)'
+        
+      }
+    })
+  }
+  
+</script>
+</body>
+</html>
