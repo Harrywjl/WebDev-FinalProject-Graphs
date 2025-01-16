@@ -16,7 +16,7 @@
     const rows = data.split("\n").slice(1)
     const gpa = []
     const hours = []
-    for (let i = 1; i < rows.length; i++) { //478 Rows
+    for (let i = 0; i < rows.length; i++) {
         let elem = rows[i]
         const row = elem.split(",")
         gpa.push(row[0])
@@ -29,18 +29,16 @@
     return usedRows
     }
   getData().then((dataRows) => {
-    labelArr = dataRows[0]
-    dataArr = dataRows[1]
-    createChart(labelArr, dataArr)
+    gpaArr = dataRows[0]
+    hourArr = dataRows[1]
+    createChart(hourArr, gpaArr)
   })
 
   async function createChart(label, data) {
     const ctx = document.getElementById('myChart')
     new Chart(ctx, {
-      type: 'scatter',
+      type: 'line',
       data: {
-        options:{
-
         labels: label,
         datasets: [{
           label: 'Relationship between GPA and Studying Time',
@@ -55,7 +53,7 @@
             beginAtZero: false
           }
         },
-        color: 'rgb(27, 242, 85)'
+        color: 'red'
         
       }
     })
