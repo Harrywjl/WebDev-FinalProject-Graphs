@@ -11,18 +11,18 @@
 <script>
     //Javascript
     async function getData() {
-    const response = await fetch("2012_SAT_Scores.csv")
+    const response = await fetch("GPA&Study_Hours.csv")
     const data = await response.text()
     const rows = data.split("\n").slice(1)
-    const schoolName = []
-    const SAT = []
-    for (let i = 0; i < 50; i++) { //478 Rows
+    const gpa = []
+    const hours = []
+    for (let i = 1; i < rows.length; i++) { //478 Rows
         let elem = rows[i]
         const row = elem.split(",")
-        schoolName.push(row[1])
-        SAT.push(parseInt(row[3]) + parseInt(row[4]) + parseInt(row[5]))
+        gpa.push(row[0])
+        hours.push(row[1])
     }
-    const usedRows = [schoolName, SAT]
+    const usedRows = [gpa, hours]
     //
     console.log(usedRows)
     //
@@ -37,13 +37,15 @@
   async function createChart(label, data) {
     const ctx = document.getElementById('myChart')
     new Chart(ctx, {
-      type: 'bar',
+      type: 'scatter',
       data: {
+        options:{
+
         labels: label,
         datasets: [{
-          label: 'Average 2012 SAT Scores (Max: 2400)',
+          label: 'Relationship between GPA and Studying Time',
           data: data,
-          borderColor: 'rgb(238, 75, 43)',
+          borderColor: 'blue',
           borderWidth: 1
         }]
       },

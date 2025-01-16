@@ -7,6 +7,13 @@ h1{
 }
 
 #bar{
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    font-size: 30px;
+    color: mediumspringgreen;
+}
+
+#line{
     font-family: 'Courier New', Courier, monospace;
     font-weight: bold;
     font-size: 30px;
@@ -14,14 +21,7 @@ h1{
     color: aqua;
 }
 
-#bar
 
-#line{
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
-    font-size: 30px;
-    color: mediumspringgreen;
-}
 
 #pie{
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
