@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<body>
+  <div>
+    <canvas id="myChart"></canvas>
+  </div>
+<script>
+    //Javascript
+    async function getData() {
+    const response = await fetch("Student_Sleep.csv")
+    const data = await response.text()
+    const rows = data.split("\r\n").slice(1)
+    console.log(rows)
+    let sixMinusHrs = 0
+    let sixToEightHrs = 0
+    let eightToTenHrs = 0
+    let tenPlusHrs = 0
+    for (let i = 0; i < rows.length; i++) { 
+        let hoursOfSleep = parseInt(rows[i])
+        if (hoursOfSleep < 6) {
+            sixMinusHrs++
+        } else if (hoursOfSleep < 8) {
+            sixToEightHrs++
+        } else if (hoursOfSleep < 10) {
+            eightToTenHrs++
+        } else {
+            tenPlusHrs++
+        }
+    }
+    const processedData = [sixMinusHrs, sixToEightHrs, eightToTenHrs, tenPlusHrs]
+    //
+    console.log(processedData)
+    //
+    return processedData
+    }
+    getData().then((processedData) => {
+        labelArr = ["6-", "6-8", "8-10", "10+"]
+        createChart(labelArr, processedData)
+    })
+
+    async function createChart(label, data) {
+        const ctx = document.getElementById('myChart')
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: label,
+                datasets: [{
+                    label: 'Student Amount of Sleep (In Hours)',
+                    data: data,
+                    borderColor: 'rgb(238, 75, 43)',
+                    borderWidth: 1
+                }]
+            },
+            backgroundColor: [
+                'rgb(255, 99, 132)',
+                'rgb(54, 162, 235)',
+                'rgb(255, 205, 86)'
+            ],
+            options: {
+                scales: {
+                    y: {
+                    beginAtZero: false
+                    }
+                },
+                color: 'rgb(27, 242, 85)'
+            
+            }
+        })
+    }
+  
+</script>
+</body>
+</html>
