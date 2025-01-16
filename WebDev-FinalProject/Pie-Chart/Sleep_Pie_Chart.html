@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="Student_Sleep.css">
 <body>
   <div>
     <canvas id="myChart"></canvas>
@@ -51,23 +52,16 @@
                 datasets: [{
                     label: 'Student Amount of Sleep (In Hours)',
                     data: data,
-                    borderColor: 'rgb(238, 75, 43)',
-                    borderWidth: 1
+                    borderWidth: 5
                 }]
             },
-            backgroundColor: [
-                'rgb(255, 99, 132)',
-                'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)'
-            ],
             options: {
-                scales: {
-                    y: {
-                    beginAtZero: false
-                    }
-                },
-                color: 'rgb(27, 242, 85)'
-            
+                backgroundColor: [
+                    'rgb(255, 99, 132)',
+                    'rgb(54, 162, 235)',
+                    'rgb(255, 205, 86)',
+                    'rgb(50, 205, 50)'
+                ]
             }
         })
     }
