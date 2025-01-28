@@ -14,14 +14,45 @@
     const response = await fetch("GPA&Study_Hours.csv")
     const data = await response.text()
     const rows = data.split("\n").slice(1)
-    const gpa = []
-    const hours = []
+    const gpa = [0,0,0,0,0,0]
+    const hours = ["1-5", "5-10", "10-15", "15-20", "20-30", ">30"]
+    let hr1to5 = 0
+    let hr5to10 = 0
+    let hr10to15 = 0
+    let hr15to20 = 0
+    let hr20to30 = 0
+    let greaterThan30 = 0
     for (let i = 0; i < rows.length; i++) {
         let elem = rows[i]
         const row = elem.split(",")
-        gpa.push(row[0])
-        hours.push(row[1])
+        let studyHours = row[1]
+        if (studyHours <= 5) {
+          hr1to5++
+          gpa[0] = gpa[0] + parseFloat(row[0])
+        } else if (studyHours <= 10) {
+          hr5to10++
+          gpa[1] = gpa[1] + parseFloat(row[0])
+        } else if (studyHours <= 15) {
+          hr10to15++
+          gpa[2] = gpa[2] + parseFloat(row[0])
+        } else if (studyHours <= 20) {
+          hr15to20++
+          gpa[3] = gpa[3] + parseFloat(row[0])
+        } else if (studyHours <= 30) {
+          hr20to30++
+          gpa[4] = gpa[4] + parseFloat(row[0])
+        } else {
+          greaterThan30++
+          gpa[5] = gpa[5] + parseFloat(row[0])
+        }
     }
+    console.log(gpa)
+    gpa[0] = gpa[0] / hr1to5
+    gpa[1] = gpa[1] / hr5to10
+    gpa[2] = gpa[2] / hr10to15
+    gpa[3] = gpa[3] / hr15to20
+    gpa[4] = gpa[4] / hr20to30
+    gpa[5] = gpa[5] / greaterThan30
     const usedRows = [gpa, hours]
     //
     console.log(usedRows)
